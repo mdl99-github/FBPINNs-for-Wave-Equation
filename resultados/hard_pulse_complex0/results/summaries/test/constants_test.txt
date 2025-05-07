@@ -1,0 +1,31 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-52.,   0.], dtype=float32), 'xmax': Array([48., 50.], dtype=float32)}
+problem: <class '__main__.Wave1DPulse'>
+problem_init_kwargs: {'c': array([[1]], dtype=uint8), 'mu': array([[0]], dtype=uint8), 'sigma': array([[4]], dtype=uint8), 'u_exact': array([[-4.5629056e-17],
+       [ 2.3510722e-09],
+       [ 2.5067065e-08],
+       ...,
+       [ 4.9368390e-01],
+       [ 4.7520903e-01],
+       [ 4.4593990e-01]], dtype=float32), 'xmin': -51.99999999999999, 'xmax': 48.0}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-52.        , -18.66666667,  14.66666667,  48.        ]), array([ 0.        , 16.66666667, 33.33333333, 50.        ])], 'subdomain_ws': [array([100., 100., 100., 100.]), array([50., 50., 50., 50.])], 'unnorm': (-1.0, 1.0)}
+network: <class 'fbpinns.networks.AdaptiveFCN'>
+network_init_kwargs: {'layer_sizes': (2, 16, 16, 16, 1)}
+n_steps: 100000
+scheduler: <class 'fbpinns.schedulers.LineSchedulerRectangularND'>
+scheduler_kwargs: {'point': [0.0], 'iaxis': 0}
+ns: ((75, 75),)
+n_test: (76, 76)
+sampler: halton
+optimiser: <function adam at 0x000001BA5D0DB420>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: True
+save_figures: False
+clear_output: True
+hostname: desktop-qsjiiuu

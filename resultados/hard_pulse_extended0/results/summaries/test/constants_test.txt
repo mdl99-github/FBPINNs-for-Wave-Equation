@@ -1,0 +1,33 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-52.,   0.], dtype=float32), 'xmax': Array([ 48., 100.], dtype=float32)}
+problem: <class '__main__.Wave1DPulse'>
+problem_init_kwargs: {'c': array([[1]], dtype=uint8), 'mu': array([[0]], dtype=uint8), 'sigma': array([[4]], dtype=uint8), 'u_exact': array([[-4.56290561e-17],
+       [ 2.35107223e-09],
+       [ 2.50670649e-08],
+       ...,
+       [-8.37647463e-09],
+       [-1.11790534e-07],
+       [-3.81456786e-08]], dtype=float32), 'xmin': -51.99999999999999, 'xmax': 48.0}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-52.        , -18.66666667,  14.66666667,  48.        ]), array([  0.        ,  14.28571429,  28.57142857,  42.85714286,
+        57.14285714,  71.42857143,  85.71428571, 100.        ])], 'subdomain_ws': [array([100., 100., 100., 100.]), array([42.85714286, 42.85714286, 42.85714286, 42.85714286, 42.85714286,
+       42.85714286, 42.85714286, 42.85714286])], 'unnorm': (-1.0, 1.0)}
+network: <class 'fbpinns.networks.AdaptiveFCN'>
+network_init_kwargs: {'layer_sizes': (2, 8, 8, 8, 8, 8, 8, 1)}
+n_steps: 100000
+scheduler: <class 'fbpinns.schedulers.AllActiveSchedulerND'>
+scheduler_kwargs: {}
+ns: ((75, 75),)
+n_test: (76, 151)
+sampler: halton
+optimiser: <function adam at 0x00000191FEB0B380>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: True
+save_figures: False
+clear_output: True
+hostname: desktop-qsjiiuu

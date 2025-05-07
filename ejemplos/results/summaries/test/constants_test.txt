@@ -1,0 +1,25 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([0, 0], dtype=int32), 'xmax': Array([1., 1.], dtype=float32)}
+problem: <class '__main__.Wave1D'>
+problem_init_kwargs: {'c': 3, 'L': 1.0}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([0.        , 0.33333333, 0.66666667, 1.        ]), array([0.        , 0.33333333, 0.66666667, 1.        ])], 'subdomain_ws': [array([0.96666667, 0.96666667, 0.96666667, 0.96666667]), array([0.96666667, 0.96666667, 0.96666667, 0.96666667])], 'unnorm': (-1.0, 1.0)}
+network: <class 'fbpinns.networks.AdaptiveFCN'>
+network_init_kwargs: {'layer_sizes': (2, 16, 1)}
+n_steps: 100000
+scheduler: <class 'fbpinns.schedulers.AllActiveSchedulerND'>
+scheduler_kwargs: {}
+ns: ((75, 75),)
+n_test: (75, 75)
+sampler: halton
+optimiser: <function adam at 0x0000019F381DB380>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: True
+save_figures: False
+clear_output: True
+hostname: desktop-qsjiiuu
