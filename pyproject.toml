@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fbpinn_wave"
+version = "0.0.1"
+dependencies = ["numpy<=1.26.4", "fbpinns>=0.1.0", "matplotlib", "jax"]
+requires-python = ">=3.11"
+authors = [
+  {name = "Thomas Vidori", email = "matias.diliscia99@gmail.com"},
+]
+readme = "README.md"
