@@ -1,13 +1,17 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[project]
+[tool.setuptools]
 name = "fbpinn_wave"
-version = "0.0.1"
-dependencies = ["numpy<=1.26.4", "fbpinns>=0.1.0", "matplotlib", "jax"]
-requires-python = ">=3.11"
-authors = [
-  {name = "Thomas Vidori", email = "matias.diliscia99@gmail.com"},
-]
-readme = "README.md"
+version = "0.1.0"
+description = "Módulo complementario para visualización y generación de resultados de FBPINNs."
+author = "Matías Di Liscia"
+author_email = "matias.diliscia99@gmail.com"
+url = "https://github.com/mdl99-github/FBPINNs-for-1D-Wave-Equation"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+install_requires = ["numpy<=1.26.4", "fbpinns>=0.1.0", "matplotlib", "jax"]
