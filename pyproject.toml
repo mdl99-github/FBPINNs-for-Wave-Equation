@@ -2,14 +2,6 @@
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-name = "fbpinn_wave"
-version = "0.1.0"
-description = "Módulo complementario para visualización y generación de resultados de FBPINNs."
-author = "Matías Di Liscia"
-author_email = "matias.diliscia99@gmail.com"
-url = "https://github.com/mdl99-github/FBPINNs-for-1D-Wave-Equation"
-install_requires = ["numpy<=1.26.4", "fbpinns>=0.1.0", "matplotlib", "jax"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
