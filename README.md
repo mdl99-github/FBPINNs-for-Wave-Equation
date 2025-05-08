@@ -7,12 +7,7 @@ Proyecto con resultados y templates para usar el módulo de FBPINNS[^1] . Sea la
 $$\frac{\partial ^ 2 u}{\partial x^2} - \frac{1}{c ^ 2} \frac{\partial ^ 2u}{\partial t ^ 2} = 0$$
 
 Se pretende encontrar soluciones para distintos valores iniciales $u(x,0)$ y demás condiciones de contorno, incorporando el residual de la ecuación en la pérdida del modelo explícitamente[^3]:
-
-<div style="text-align: center;">
-    <span style="color: var(--color-text);">
-        <img src="https://latex.codecogs.com/svg.latex?\mathcal{L}(x_i,t_i,\mathbf{w})=\frac{1}{N}\sum_{i=1}^N\left(\frac{\partial%20^2%20u^*(x_i,t_i,\mathbf{w})}{\partial%20x^2}%20-%20\frac{1}{c%20^2}%20\frac{\partial%20^2%20u^*(x_i,t_i,\mathbf{w})}{\partial%20t%20^2}\right)^2" />
-    </span>
-</div>
+$$L(x_i,t_i,\mathbf{w}) = \frac{1}{N}\sum_{i=1}^N(\frac{\partial ^ 2 u^*(x_i,t_i,\mathbf{w})}{\partial x^2} - \frac{1}{c ^ 2} \frac{\partial ^ 2u^*(x_i,t_i,\mathbf{w})}{\partial t ^ 2})^2$$
 
 Con $u^*(x_i,t_i,\mathbf{w})$ la salida final de la red.
 
