@@ -58,7 +58,7 @@ class ExactC:
         'u_compare': None (Default). Solución a dibujar en caso de querer comparar con u_n(x,t).
     '''
     fig, ax = plt.subplots()
-    line1, = ax.plot(self.x, self.u[:,0], label='k-wave', **kwargs) 
+    line1, = ax.plot(self.x, self.u[:,0], label='Analítica', **kwargs) 
     ax.set_xlabel('Posición en x [m]')
     ax.set_ylabel('Amplitud')
     ax.grid()
