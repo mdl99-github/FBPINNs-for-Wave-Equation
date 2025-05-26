@@ -9,6 +9,79 @@ from scipy.io.matlab import loadmat
 import matplotlib.animation as animation
 from IPython.display import HTML
 
+class ExactC:
+  '''
+    Define una clase para la solución simulada por k-wave de la ecuación
+
+    d^2u/dx^2 - 1/c^2 * d^2u/dt^2 = 0
+
+    Con condiciones de contorno:
+    u (x, 0) = f(x) = e^(-0.5*(x-mu)^2/sigma^2)
+    u_t (x, 0) = g(x) = 0
+
+  '''
+  def __init__(self, Nx, Nt, xmax, xmin, tmax, tmin, sigma, c):
+
+    self.x = np.linspace(xmin, xmax, Nx)
+    self.t = np.linspace(tmin, tmax, Nt)
+
+    x, t = np.meshgrid(self.x, self.t, indexing='xy')
+    analytical_sol = lambda x,t: 0.5*jnp.exp(-(x-c*t)**2/2/sigma**2)+0.5*jnp.exp(-(x+c*t)**2/2/sigma**2)
+
+    self.u = analytical_sol(x,t).T
+    self.Nx = Nx
+    self.Nt = Nt
+    self.c = c
+
+  def plot_colormap(self, **kwargs):
+    '''
+        Grafica la/las soluciones en un mapa de calor.
+
+    '''
+    x, t = np.meshgrid(self.x, self.t, indexing='xy')
+
+    u = self.u[:x.shape[0]-1, :x.shape[1]-1].T   
+    plt.pcolormesh(x, t, u, **kwargs)
+    plt.colorbar()
+    plt.xlabel('x')
+    plt.ylabel('t')
+    plt.title('Exact Solution - c = ' + str(self.c))
+    plt.show()
+
+  def animation(self, compare=False, u_compare=None, **kwargs):
+
+    '''
+        Grafica la solución u(x,t) animada a medida que avanza t. Recibe:
+
+        'compare': False (Default). Si es True dibuja además de u_n(x,t) la solución recibida en u_compare.
+
+        'u_compare': None (Default). Solución a dibujar en caso de querer comparar con u_n(x,t).
+    '''
+    fig, ax = plt.subplots()
+    line1, = ax.plot(self.x, self.u[:,0], label='k-wave', **kwargs) 
+    ax.set_xlabel('Posición en x [m]')
+    ax.set_ylabel('Amplitud')
+    ax.grid()
+    title = ax.set_title('t = 0')
+    if compare:
+      line2, = ax.plot(self.x, u_compare[:,0], label='FBPINN')
+    ax.legend()
+
+    # Función privada de actualización para la animación
+    def actualizar(t):
+        title.set_text(f't = {self.t[t]:.4f}')
+        line1.set_ydata(self.u[:,t])  
+        if compare:
+          line2.set_ydata(u_compare[:,t])
+          return line1, line2, title
+        return line1, title
+
+
+    # Crear la animación
+    ani = animation.FuncAnimation(fig, func=actualizar, frames=self.Nt-1, interval=30, blit=True)
+    display(HTML(ani.to_jshtml()))
+    plt.close(fig)
+
 class ExactMix:
   '''
     Define una clase para la solución simulada por k-wave de la ecuación
@@ -742,3 +815,61 @@ class Wave1D:
         vu = u(vx,vt).reshape(-1,1, order='F')
 
         return vu
+    
+class Wave1DMultiC:
+    """z
+          d^2 u    1   d^2 u
+          ----- - ---  ----- = 0
+          dx^2    c^2  dt^2
+
+        Boundary conditions:
+        u (x, 0) = f(x) = e^(-0.5*(x/sigma)**2)
+        u_t (x, 0) = g(x) = 0
+    """
+
+    @staticmethod
+    def init_params(sigma, u_exact):
+        static_params = {
+            "dims":(1,3),
+            "sigma":sigma,
+            "u_exact":u_exact
+            }
+
+        return static_params, {}
+
+    @staticmethod
+    def sample_constraints(all_params, domain, key, sampler, batch_shapes):
+
+        # physics loss
+        x_batch_phys = domain.sample_interior(all_params, key, sampler, batch_shapes[0])
+        required_ujs_phys = (
+            (0,(0,0)), #uxx
+            (0,(1,1)), #utt
+        )
+
+        return [[x_batch_phys, required_ujs_phys],]
+
+    @staticmethod
+    def constraining_fn(all_params, x_batch, u):
+
+        x, t, c, sigma = x_batch[:,0:1], x_batch[:,1:2], x_batch[:,2:3], all_params["static"]["problem"]["sigma"]
+        t1 = sigma/c
+        
+        u = jax.nn.sigmoid(5*(2-t/t1))*jnp.exp(-0.5*(x/sigma)**2) + u*jnp.tanh(t/t1)**2
+
+        return u
+
+    @staticmethod
+    def loss_fn(all_params, constraints):
+
+        # physics loss
+        x_batch_phys, uxx, utt = constraints[0]
+        c = x_batch_phys[:,2:3]
+        phys = jnp.mean((uxx - utt/c**2)**2)
+
+        return phys
+
+    @staticmethod
+    def exact_solution(all_params, x_batch, batch_shape):
+
+        return all_params["static"]["problem"]["u_exact"]
