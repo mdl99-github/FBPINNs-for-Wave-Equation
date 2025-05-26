@@ -1,0 +1,31 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-49.5,   0. ,   0.5], dtype=float32), 'xmax': Array([49.5, 50. ,  5. ], dtype=float32)}
+problem: <class '__main__.Wave1DMultiC'>
+problem_init_kwargs: {'sigma': 4, 'u_exact': Array([[5.571034e-34],
+       [5.571034e-34],
+       [5.571034e-34],
+       ...,
+       [0.000000e+00],
+       [0.000000e+00],
+       [0.000000e+00]], dtype=float32)}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-49.5, -16.5,  16.5,  49.5]), array([ 0.        , 16.66666667, 33.33333333, 50.        ]), array([0.5, 2. , 3.5, 5. ])], 'subdomain_ws': [array([99., 99., 99., 99.]), array([50., 50., 50., 50.]), array([4.5, 4.5, 4.5, 4.5])], 'unnorm': (-1.0, 1.0)}
+network: <class 'fbpinns.networks.FCN'>
+network_init_kwargs: {'layer_sizes': (3, 8, 8, 8, 8, 8, 8, 1)}
+n_steps: 120000
+scheduler: <class 'fbpinns.schedulers.AllActiveSchedulerND'>
+scheduler_kwargs: {}
+ns: ((40, 40, 40),)
+n_test: (300, 300, 5)
+sampler: halton
+optimiser: <function adam at 0x7f1da1fd0040>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: True
+save_figures: False
+clear_output: True
+hostname: dili

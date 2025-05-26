@@ -9,6 +9,74 @@ from scipy.io.matlab import loadmat
 import matplotlib.animation as animation
 from IPython.display import HTML
 
+class ExactAny:
+  '''
+    Define una clase para la solución simulada por k-wave de la ecuación
+
+    d^2u/dx^2 - 1/c^2 * d^2u/dt^2 = 0
+
+    Con condiciones de contorno para una f(x) genérica:
+    u (x, 0) = f(x)
+    u_t (x, 0) = g(x) = 0
+
+  '''
+  def __init__(self, file):
+    s = loadmat(file)
+    self.u = s['exact'][0][0][0]
+    self.x = s['exact'][0][0][1]
+    self.t = s['exact'][0][0][2][0]
+    self.Nx = s['exact'][0][0][3][0][0]
+    self.Nt = s['exact'][0][0][4][0][0]
+    self.c = s['exact'][0][0][5]
+
+  def plot_colormap(self, **kwargs):
+    '''
+        Grafica la/las soluciones en un mapa de calor.
+    '''
+    x, t = np.meshgrid(self.x, self.t, indexing='xy')
+
+    u = self.u[:self.x.shape[0]-1, :self.t.shape[0]-1].T   
+    plt.pcolormesh(x, t, u, **kwargs)
+    plt.colorbar()
+    plt.xlabel('x')
+    plt.ylabel('t')
+    plt.title('Exact Solution ')
+    plt.show()
+
+  def animation(self, compare=False, u_compare=None, **kwargs):
+
+    '''
+        Grafica la solución n-ésima u_n(x,t) animada a medida que avanza t. Recibe:
+        
+        'compare': False (Default). Si es True dibuja además de u_n(x,t) la solución recibida en u_compare.
+
+        'u_compare': None (Default). Solución a dibujar en caso de querer comparar con u_n(x,t).
+    '''
+    fig, ax = plt.subplots()
+    line1, = ax.plot(self.x, self.u[:,0], label='k-wave', **kwargs) 
+    ax.set_xlabel('Posición en x [m]')
+    ax.set_ylabel('Amplitud')
+    ax.grid()
+    title = ax.set_title('t = 0')
+    if compare:
+      line2, = ax.plot(self.x, u_compare[:,0], label='FBPINN')
+    ax.legend()
+
+    # Función privada de actualización para la animación
+    def actualizar(t):
+        title.set_text(f't = {self.t[t]:.4f}')
+        line1.set_ydata(self.u[:,t])  
+        if compare:
+          line2.set_ydata(u_compare[:,t])
+          return line1, line2, title
+        return line1, title
+
+
+    # Crear la animación
+    ani = animation.FuncAnimation(fig, func=actualizar, frames=self.Nt-1, interval=30, blit=True)
+    display(HTML(ani.to_jshtml()))
+    plt.close(fig)
+
 class ExactC:
   '''
     Define una clase para la solución simulada por k-wave de la ecuación
