@@ -8,7 +8,7 @@ where = ["src"]
 
 [project]
 name = "fbpinn_wave"
-version = "0.1.0"
+version = "0.1.1"
 description = "Módulo complementario para visualización y generación de resultados de FBPINNs."
 authors = [{name = "Matías Di Liscia", email = "matias.diliscia99@gmail.com"}]
 dependencies = ["numpy<=1.26.4", "fbpinns>=0.1.0", "matplotlib", "jax"]
