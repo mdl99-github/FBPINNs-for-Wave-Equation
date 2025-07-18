@@ -941,3 +941,89 @@ class Wave1DMultiC:
     def exact_solution(all_params, x_batch, batch_shape):
 
         return all_params["static"]["problem"]["u_exact"]
+    
+def triang(mu, w, x):
+  t = jnp.zeros_like(x)
+  m = 2/w
+  b1 = (w/2-mu)*m
+  b2 = (w/2 + mu)*m
+  t = jnp.where(x > mu - w/2, m*x+b1, t)
+  t = jnp.where(x > mu, -m*x+b2, t)
+  t = jnp.where(x > mu + w/2, 0, t)
+  return t
+
+class Wave1DTriang: #soft
+    """
+          d^2 u    1   d^2 u
+          ----- - ---  ----- = 0
+          dx^2    c^2  dt^2
+
+        Boundary conditions:
+        u (x, 0) = f(x) = triang(0, width, x)
+        u_t (x, 0) = g(x) = 0
+    """
+
+    @staticmethod
+    def init_params(mu, width, c, u_exact):
+        static_params = {
+            "dims":(1,2),
+            "mu":mu,
+            "width":width,
+            "c":c,
+            "u_exact":u_exact
+            }
+
+        return static_params, {}
+
+    @staticmethod
+    def sample_constraints(all_params, domain, key, sampler, batch_shapes):
+
+        # physics loss
+        x_batch_phys = domain.sample_interior(all_params, key, sampler, batch_shapes[0])
+        required_ujs_phys = (
+            (0,(0,0)), #uxx
+            (0,(1,1)), #utt
+        )
+
+        # boundary loss
+        x_bound = domain.sample_boundaries(all_params, key, sampler, ((1,),(1,),(300,),(1,)))
+
+        width, mu = all_params["static"]["problem"]["width"], all_params["static"]["problem"]["mu"]
+        u_boundary = triang(mu, width, x_bound[2][:,0], n_max=None).reshape(300,1)
+        ut_boundary = jnp.zeros_like(x_bound[2][:,1]).reshape(300,1)
+        required_ujs_boundary = (
+        (0,()),
+        (0,(1,)),
+    )
+
+
+        return [[x_batch_phys, required_ujs_phys],
+                [x_bound[2], u_boundary, required_ujs_boundary], [x_bound[2], ut_boundary, required_ujs_boundary]]
+
+    @staticmethod
+    def constraining_fn(all_params, x_batch, u):
+        return u
+
+    @staticmethod
+    def loss_fn(all_params, constraints):
+
+        # physics loss
+        _, uxx, utt = constraints[0]
+        c = all_params["static"]["problem"]["c"]
+        phys = jnp.mean((uxx - utt/c**2)**2)
+
+        # boundary loss
+        _, uc, u, ut = constraints[1]
+        boundary_1 = jnp.mean((u-uc)**2)
+
+        _, utc, u, ut = constraints[2]
+        boundary_2 = jnp.mean((ut-utc)**2)
+
+        return phys + boundary_1 + boundary_2
+
+    @staticmethod
+    def exact_solution(all_params, x_batch, batch_shape):
+
+        return all_params["static"]["problem"]["u_exact"]
+    
+  
