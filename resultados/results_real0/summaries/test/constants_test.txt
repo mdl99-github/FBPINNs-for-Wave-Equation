@@ -1,0 +1,49 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-0.0075,  0.    ], dtype=float32), 'xmax': Array([7.5e-03, 5.0e-05], dtype=float32)}
+problem: <class '__main__.Wave1DPulse'>
+problem_init_kwargs: {'c': 1490, 'mu': array([[0]], dtype=uint8), 'sigma': array([[0.0003]]), 'u_exact': array([[-2.8616801e-18],
+       [ 1.2361540e-10],
+       [ 5.0442700e-10],
+       ...,
+       [-3.6490320e-07],
+       [-4.0353294e-07],
+       [-4.2260515e-07]], dtype=float32)}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-0.0075, -0.0025,  0.0025,  0.0075]), array([0.00000000e+00, 1.28205128e-06, 2.56410256e-06, 3.84615385e-06,
+       5.12820513e-06, 6.41025641e-06, 7.69230769e-06, 8.97435897e-06,
+       1.02564103e-05, 1.15384615e-05, 1.28205128e-05, 1.41025641e-05,
+       1.53846154e-05, 1.66666667e-05, 1.79487179e-05, 1.92307692e-05,
+       2.05128205e-05, 2.17948718e-05, 2.30769231e-05, 2.43589744e-05,
+       2.56410256e-05, 2.69230769e-05, 2.82051282e-05, 2.94871795e-05,
+       3.07692308e-05, 3.20512821e-05, 3.33333333e-05, 3.46153846e-05,
+       3.58974359e-05, 3.71794872e-05, 3.84615385e-05, 3.97435897e-05,
+       4.10256410e-05, 4.23076923e-05, 4.35897436e-05, 4.48717949e-05,
+       4.61538462e-05, 4.74358974e-05, 4.87179487e-05, 5.00000000e-05])], 'subdomain_ws': [array([0.015, 0.015, 0.015, 0.015]), array([3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06,
+       3.84615385e-06, 3.84615385e-06, 3.84615385e-06, 3.84615385e-06])], 'unnorm': (0.0, 1.0)}
+network: <class 'fbpinns.networks.FCN'>
+network_init_kwargs: {'layer_sizes': (2, 16, 8, 8, 8, 8, 8, 1)}
+n_steps: 400000
+scheduler: <class 'fbpinns.schedulers.LineSchedulerRectangularND'>
+scheduler_kwargs: {'point': Array([0.], dtype=float32), 'iaxis': 0}
+ns: ((300, 300),)
+n_test: (75, 2000)
+sampler: halton
+optimiser: <function adam at 0x7fe8675542c0>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: True
+save_figures: False
+clear_output: True
+hostname: dili

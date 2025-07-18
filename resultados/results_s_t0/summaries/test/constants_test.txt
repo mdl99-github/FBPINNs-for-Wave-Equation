@@ -1,0 +1,44 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-49.5,   0. ], dtype=float32), 'xmax': Array([49.5, 50. ], dtype=float32)}
+problem: <class '__main__.Wave1DTriang'>
+problem_init_kwargs: {'mu': 0, 'width': 16, 'c': array([[1]], dtype=uint8), 'u_exact': array([[-1.1079826e-17],
+       [-1.1835938e-10],
+       [-2.2745175e-09],
+       ...,
+       [ 4.6574125e-01],
+       [ 4.8152828e-01],
+       [ 4.9668443e-01]], dtype=float32)}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-49.5       , -44.28947368, -39.07894737, -33.86842105,
+       -28.65789474, -23.44736842, -18.23684211, -13.02631579,
+        -7.81578947,  -2.60526316,   2.60526316,   7.81578947,
+        13.02631579,  18.23684211,  23.44736842,  28.65789474,
+        33.86842105,  39.07894737,  44.28947368,  49.5       ]), array([ 0.        ,  2.63157895,  5.26315789,  7.89473684, 10.52631579,
+       13.15789474, 15.78947368, 18.42105263, 21.05263158, 23.68421053,
+       26.31578947, 28.94736842, 31.57894737, 34.21052632, 36.84210526,
+       39.47368421, 42.10526316, 44.73684211, 47.36842105, 50.        ])], 'subdomain_ws': [array([26.05263158, 26.05263158, 26.05263158, 26.05263158, 26.05263158,
+       26.05263158, 26.05263158, 26.05263158, 26.05263158, 26.05263158,
+       26.05263158, 26.05263158, 26.05263158, 26.05263158, 26.05263158,
+       26.05263158, 26.05263158, 26.05263158, 26.05263158, 26.05263158]), array([13.15789474, 13.15789474, 13.15789474, 13.15789474, 13.15789474,
+       13.15789474, 13.15789474, 13.15789474, 13.15789474, 13.15789474,
+       13.15789474, 13.15789474, 13.15789474, 13.15789474, 13.15789474,
+       13.15789474, 13.15789474, 13.15789474, 13.15789474, 13.15789474])], 'unnorm': (-1.0, 1.0)}
+network: <class 'fbpinns.networks.FCN'>
+network_init_kwargs: {'layer_sizes': (2, 16, 16, 16, 16, 16, 16, 16, 1)}
+n_steps: 100000
+scheduler: <class 'fbpinns.schedulers.LineSchedulerRectangularND'>
+scheduler_kwargs: {'point': Array([0.], dtype=float32), 'iaxis': 0}
+ns: ((120, 120),)
+n_test: (799, 200)
+sampler: halton
+optimiser: <function adam at 0x7f3799444220>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: True
+save_figures: False
+clear_output: True
+hostname: dili

@@ -1038,6 +1038,8 @@ def shift_solution_1d(u0, mu, x, crop=None):
 
       'crop': Límites espaciales para recortar la solución. Por default vale None y no se recorta.
 
+      Devuelve la solución dezplazada y el eje espacial recortado (en caso de que 'crop' no sea None).
+
     '''
     Nx = x.shape[0]
     xmin = np.min(x)
