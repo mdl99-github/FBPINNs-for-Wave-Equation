@@ -1026,4 +1026,33 @@ class Wave1DTriang: #soft
 
         return all_params["static"]["problem"]["u_exact"]
     
+def shift_solution_1d(u0, mu, x, crop=None):
+    '''
+      Desplaza la solución en el dominio espacial. Recibe:
+
+      'u0': Solución a desplazar.
+
+      'mu': Cantidad a desplazar en el dominio espacial.
+
+      'x': Valores del dominio espacial.
+
+      'crop': Límites espaciales para recortar la solución. Por default vale None y no se recorta.
+
+    '''
+    Nx = x.shape[0]
+    xmin = np.min(x)
+    xmax = np.max(x)
+    dx = (xmax - xmin)/Nx
+    shift = int(np.round(mu/dx))
+    u = np.roll(u0, shift, axis=0)
+    if shift > 0:
+        u[:shift,:] = jnp.zeros_like(u[:shift,:])
+    if shift < 0:
+        u[shift:,:] = jnp.zeros_like(u[shift:,:])
+    if crop:
+        i_m = np.argmin((x-crop[0])**2)
+        i_p = np.argmin((x-crop[1])**2)
+        return u[i_m:i_p,:], x[i_m:i_p]
+    return u
+    
   
