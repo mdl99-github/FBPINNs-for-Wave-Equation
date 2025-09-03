@@ -22,12 +22,12 @@ Con $u^*(x_i,t_i,\mathbf{w})$ la salida final de la red.
 Si se quieren todos los archivos se puede utilizar:
 
 ```
- git clone https://github.com/mdl99-github/FBPINNs-for-1D-Wave-Equation
+ git clone https://github.com/mdl99-github/FBPINNs-for-Wave-Equation
 ```
 
 Si se quiere instalar el módulo `fbpinn_wave` en un entorno de Python:
 ```
-pip install git+https://github.com/mdl99-github/FBPINNs-for-1D-Wave-Equation
+pip install git+https://github.com/mdl99-github/FBPINNs-for-Wave-Equation
 ```
 
 ## Uso
