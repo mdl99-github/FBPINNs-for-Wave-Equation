@@ -14,7 +14,7 @@ Con $u^*(x_i,t_i,\mathbf{w})$ la salida final de la red.
 
 ## Contiene:
 - Ejemplo resolviendo la ecuación de onda unidimensional para condición inicial senoidal, comentado y que puede ser usado como template para resolver otros problemas.
-- Resultados para la condición inicial de pulso gaussiano para distintas situaciones.
+- Resultados para la condición inicial de pulso gaussiano y triangular para distintas situaciones.
 - Módulo complementario con algunas funciones útiles que se confeccionaron para facilitar la visualización y comparación de resultados.
 
 ## Instalación
