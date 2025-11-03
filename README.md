@@ -14,7 +14,7 @@ Con $u^*(x_i,t_i,\mathbf{w})$ la salida final de la red.
 
 ## Contiene:
 - Ejemplo resolviendo la ecuación de onda unidimensional para condición inicial senoidal, comentado y que puede ser usado como template para resolver otros problemas.
-- Resultados para la condición inicial de pulso gaussiano para distintas situaciones.
+- Resultados para la condición inicial de pulso gaussiano y triangular para distintas situaciones.
 - Módulo complementario con algunas funciones útiles que se confeccionaron para facilitar la visualización y comparación de resultados.
 
 ## Instalación
@@ -22,12 +22,12 @@ Con $u^*(x_i,t_i,\mathbf{w})$ la salida final de la red.
 Si se quieren todos los archivos se puede utilizar:
 
 ```
- git clone https://github.com/mdl99-github/FBPINNs-for-1D-Wave-Equation
+ git clone https://github.com/mdl99-github/FBPINNs-for-Wave-Equation
 ```
 
 Si se quiere instalar el módulo `fbpinn_wave` en un entorno de Python:
 ```
-pip install git+https://github.com/mdl99-github/FBPINNs-for-1D-Wave-Equation
+pip install git+https://github.com/mdl99-github/FBPINNs-for-Wave-Equation
 ```
 
 ## Uso
