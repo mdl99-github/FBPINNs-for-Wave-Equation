@@ -1072,7 +1072,6 @@ def shift_solution_sinogram(s, r, c, mu, x, dt, scale=3, place=0.3):
         else:
             s_new[i,shift + s.shape[1]:] = s_new[i,shift + s.shape[1]-1]*np.ones_like(s_new[i,shift+s.shape[1]:])*sigmoid(-shift, scale=-scale)
     return s_new
-s
 
 def sigmoid(length, scale=3, place=0.3):
     t = np.linspace(0, 1, length)
