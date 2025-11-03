@@ -1057,4 +1057,23 @@ def shift_solution_1d(u0, mu, x, crop=None):
         return u[i_m:i_p,:], x[i_m:i_p]
     return u
     
-  
+def shift_solution_sinogram(s, r, c, mu, x, dt, scale=3, place=0.3):
+    s_new = np.zeros_like(s)
+    for i, x_sens in enumerate(x):
+        r_new = np.linalg.norm(x_sens - mu)
+        diff = r - r_new
+        fact = np.sqrt(r/r_new)
+        shift = -int(diff/c/dt)
+        s_new[i,:] = np.roll(s[i], shift)*fact
+        
+
+        if shift > 0:
+            s_new[i,:shift] = s_new[i,shift]*np.ones_like(s_new[i,:shift])*sigmoid(shift, scale=scale)
+        else:
+            s_new[i,shift + s.shape[1]:] = s_new[i,shift + s.shape[1]-1]*np.ones_like(s_new[i,shift+s.shape[1]:])*sigmoid(-shift, scale=-scale)
+    return s_new
+s
+
+def sigmoid(length, scale=3, place=0.3):
+    t = np.linspace(0, 1, length)
+    return 1 / (1 + np.exp(-scale * (t - place)))

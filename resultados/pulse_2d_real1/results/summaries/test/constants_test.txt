@@ -1,0 +1,27 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-0.05, -0.05,  0.  ], dtype=float32), 'xmax': Array([5.e-02, 5.e-02, 5.e-05], dtype=float32)}
+problem: <class 'fbpinns.problems.WaveEquationConstantVelocity3D'>
+problem_init_kwargs: {'c0': 1490, 'source': Array([[0.   , 0.   , 0.003, 1.   ]], dtype=float32)}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-0.05      , -0.01666667,  0.01666667,  0.05      ]), array([-0.05      , -0.01666667,  0.01666667,  0.05      ]), array([0.00000000e+00, 7.14285714e-06, 1.42857143e-05, 2.14285714e-05,
+       2.85714286e-05, 3.57142857e-05, 4.28571429e-05, 5.00000000e-05])], 'subdomain_ws': [array([0.1, 0.1, 0.1, 0.1]), array([0.1, 0.1, 0.1, 0.1]), array([2.14285714e-05, 2.14285714e-05, 2.14285714e-05, 2.14285714e-05,
+       2.14285714e-05, 2.14285714e-05, 2.14285714e-05, 2.14285714e-05])], 'unnorm': (0.0, 1.0)}
+network: <class 'fbpinns.networks.FCN'>
+network_init_kwargs: {'layer_sizes': (3, 32, 32, 16, 16, 1)}
+n_steps: 100000
+scheduler: <class 'fbpinns.schedulers.PlaneSchedulerRectangularND'>
+scheduler_kwargs: {'point': Array([0.], dtype=float32), 'iaxes': [0, 1]}
+ns: ((50, 50, 125),)
+n_test: (10, 10, 10)
+sampler: halton
+optimiser: <function adam at 0x7136bc9def20>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: False
+save_figures: False
+clear_output: True
+hostname: prometeo
