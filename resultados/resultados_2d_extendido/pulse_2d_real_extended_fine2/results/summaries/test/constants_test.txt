@@ -1,0 +1,25 @@
+run: test
+domain: <class 'fbpinns.domains.RectangularDomainND'>
+domain_init_kwargs: {'xmin': Array([-0.000875, -0.000875,  0.      ], dtype=float32), 'xmax': Array([8.75e-04, 8.75e-04, 1.75e-06], dtype=float32)}
+problem: <class 'Wave2D'>
+problem_init_kwargs: {'c0': 1490, 'source': Array([[0.0e+00, 0.0e+00, 7.5e-05, 1.0e+00]], dtype=float32)}
+decomposition: <class 'fbpinns.decompositions.RectangularDecompositionND'>
+decomposition_init_kwargs: {'subdomain_xs': [array([-0.000875  , -0.00029167,  0.00029167,  0.000875  ]), array([-0.000875  , -0.00029167,  0.00029167,  0.000875  ]), array([0.00000000e+00, 5.83333333e-07, 1.16666667e-06, 1.75000000e-06])], 'subdomain_ws': [array([0.00175, 0.00175, 0.00175, 0.00175]), array([0.00175, 0.00175, 0.00175, 0.00175]), array([1.75e-06, 1.75e-06, 1.75e-06, 1.75e-06])], 'unnorm': (0.0, 1.0)}
+network: <class 'fbpinns.networks.FCN'>
+network_init_kwargs: {'layer_sizes': (3, 32, 32, 32, 16, 1)}
+n_steps: 200000
+scheduler: <class 'fbpinns.schedulers.PlaneSchedulerRectangularND'>
+scheduler_kwargs: {'point': Array([0.], dtype=float32), 'iaxes': [0, 1]}
+ns: ((50, 50, 60),)
+n_test: (2, 2, 2)
+sampler: halton
+optimiser: <function adam at 0x7a5711e03640>
+optimiser_kwargs: {'learning_rate': 0.001}
+seed: 0
+summary_freq: 1000
+test_freq: 1000
+model_save_freq: 10000
+show_figures: False
+save_figures: False
+clear_output: True
+hostname: z590-aorus-pro-ax

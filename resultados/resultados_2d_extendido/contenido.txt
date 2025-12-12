@@ -1,0 +1,19 @@
+- Modelos ya entrenados en pulse_2d_real_extended_fine1 y pulse_2d_real_extended_fine2.
+
+- Presiones iniciales con formas de venas en la carpeta imagenes.
+
+- Sinogramas de j-wave y pesos y medias de gaussianas correspondientes a cada una de ellas en las carpetas parametros numeradas.
+
+- Ejemplo y resultados de la extensión de un sinograma en analisis_extended.ipynb
+
+- Ejemplos completos de inferencia de las FBPINNs aplicados a las presiones iniciales mencionadas y su comparación con las simulaciones de j-wave.
+
+- El módulo de Delay and Sum para realizar la inversión de los sinogramas en delayandsum.py.
+
+- Script para obtener y guardar los pesos y medias de las gaussianas en parametros.py.
+
+- Script para obtener y guardar los sinogramas de j-wave en jwave_script.py.
+
+- Los puntos de control para el aprendizaje semi-supervisado de la red pulse_2d_real_extended_fine2 en x_batch.npy y u_control.npy.
+
+- El script trampa.py que contiene la clase WaveTrampa() que es idéntico a Wave2D(). Simplemente se entrenó con el primer nombre y los modelos no corren si no se llama igual.
