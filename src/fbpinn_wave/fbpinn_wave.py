@@ -1159,6 +1159,8 @@ def shift_solution_sinogram(s, r, c, mu, x, dt):
 
       's': Sinograma para un pulso en el origen.
 
+      'r': Distancia al origen de los sensores.
+
       'c': Velocidad de propagación de la onda. Se supone constante.
 
       'mu': Posición del nuevo pulso.
@@ -1179,9 +1181,9 @@ def shift_solution_sinogram(s, r, c, mu, x, dt):
         s_new[i,:] = np.roll(s[i], shift)*fact
 
         if shift > 0:
-            s_new[i,:shift] = s_new[i,shift]*np.ones_like(s_new[i,:shift])
+            s_new[i,:shift] = np.zeros_like(s_new[i,:shift])
         else:
-            s_new[i,shift + s.shape[1]:] = s_new[i,shift + s.shape[1]-1]*np.ones_like(s_new[i,shift+s.shape[1]:])
+            s_new[i,shift + s.shape[1]:] = np.zeros_like(s_new[i,shift+s.shape[1]:])
     return s_new
 
 def exp_decay(length, scale):
@@ -1225,11 +1227,6 @@ def extend_sinogram(s, r, c, r_new, dt, t_end, t0=0, margin=0.2, n_resample=0, s
 
     tts = (r + r*margin)/c
     max_shift = (tts - t_end)/dt
-
-    where = s_new.shape[1] - ti_add - int(0.05*ti_add)
-    if smooth:
-        for i in range(s_new.shape[0]):
-            s_new[i,where:] = s_new[i,where:]*np.ones_like(s_new[i,where:])*exp_decay(s_new.shape[1] - where, scale=1000)
     
     diff = r - r_new
     fact = np.sqrt(r/r_new)
@@ -1266,13 +1263,24 @@ def metricas_imagen(u1, u2):
     rmse  = np.sqrt(np.mean(ec))
     rmse = np.format_float_scientific(rmse, precision=3)
 
-    drange = (np.max(u1) - np.min(u2))
+    maxu1 = np.max(u1)
+    maxu2 = np.max(u2)
+
+    minu1 = np.min(u1)
+    minu2 = np.min(u2)
+
+    cmap = plt.get_cmap('viridis') 
+
+    u1_image = cmap(u1)
+    u2_image = cmap(u2)
+
+    drange = (np.max([maxu1,maxu2]) - np.min([minu1,minu2]))
 
     psnr =  10*np.log10(drange**2 / np.mean((u1 - u2)**2))
     psnr = peak_signal_noise_ratio(u1, u2, data_range=drange)
 
 
-    ssim = structural_similarity(u1, u2, data_range=drange)
+    ssim = structural_similarity(u1_image, u2_image, channel_axis=2, data_range=1)
 
     pcc, _ = pearsonr(u1.flatten(), u2.flatten())
 

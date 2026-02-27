@@ -1,0 +1,21 @@
+subdomains: (4,4,4)
+
+points: (50,50,60) / SIN HACER (100,100) en t_end
+
+layers: (32,32,32,16,1)
+
+t_min = 0
+t_max = 35e-6 /20
+x_min = -17.5e-3 /20
+x_max = 17.5e-3 /20
+y_min = -17.5e-3 /20
+y_max = 17.5e-3 /20
+
+sigma = 1.5e-3 /20
+
+ws = 3
+
+epochs: 100000
+
+Haciendo "trampa": SIN HACER muestreo en el final del tiempo. Funciona en todos los sensores y mejora mucho. ECM de 2e-5 y la reconstrucción con DAS es la mejor.
+
