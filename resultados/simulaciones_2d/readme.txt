@@ -1,4 +1,4 @@
-Descripción de carpete:
+Descripción de carpeta:
 
 "resultados... .ipynb": corresponden a los notebooks con las simulaciones realizadas.
 
@@ -12,4 +12,4 @@ Descripción de carpete:
 
 "control": carpeta con valores de onda etiquetados para realizar la simulación semi-supervisada.
 
-"parametros.py" y "jwave_script.py": programas de python para obtener pesos y medias, y los sinogramas de j-Wave de las imágenes de tejido respectivamente.
+"parametros.py" y "jwave_script.py": programas de python para obtener pesos y medias, y los sinogramas de j-Wave de las imágenes de tejidos respectivamente.
